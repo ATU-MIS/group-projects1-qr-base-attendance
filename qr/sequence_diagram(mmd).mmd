@@ -1,0 +1,36 @@
+sequenceDiagram
+    autonumber
+    actor User as User
+    participant GUI as GUI (Interface)
+    participant QRLib as QR Logic (Lib)
+    participant FS as File System
+
+    User->>GUI: Enters text & selects settings
+    User->>GUI: Clicks "Generate QR"
+    activate GUI
+    
+    GUI->>GUI: Validate Input (Is Empty?)
+
+    alt Input is NOT Empty
+        GUI->>QRLib: Create QRCode Object
+        activate QRLib
+        QRLib-->>GUI: Return QR Image Object
+        deactivate QRLib
+        
+        GUI-->>User: Display QR Preview
+        
+        User->>GUI: Clicks "Save QR"
+        GUI->>FS: Open "Save As" Dialog
+        activate FS
+        FS-->>GUI: Return Selected Path
+        deactivate FS
+        
+        opt Path Selected
+            GUI->>FS: Write Image to Disk
+            GUI-->>User: Show "Saved" Status
+        end
+
+    else Input is Empty
+        GUI-->>User: Show Error ("Please enter text")
+    end
+    deactivate GUI

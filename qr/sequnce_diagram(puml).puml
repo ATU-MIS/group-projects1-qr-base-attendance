@@ -1,0 +1,48 @@
+@startuml
+skinparam style strictuml
+skinparam sequenceMessageAlign center
+title QRStudio - QR Code Generation Sequence
+
+actor "User" as User
+participant "GUI (Interface)" as GUI
+participant "QR Logic\n(qrcode Lib)" as QRLib
+participant "File System" as FileSys
+
+User -> GUI: Enters text & selects settings
+User -> GUI: Clicks "Generate QR" button
+activate GUI
+
+GUI -> GUI: Validate Input (Is Empty?)
+
+alt Input is NOT Empty
+    GUI -> QRLib: Create QRCode Object (Data, ErrorCorrection)
+    activate QRLib
+    QRLib -> QRLib: make_image()
+    QRLib --> GUI: Return QR Image Object
+    deactivate QRLib
+    
+    GUI -> GUI: Resize Image (For Preview)
+    GUI --> User: Display Generated QR on Screen
+    
+    ... User decides to save ...
+    
+    User -> GUI: Clicks "Save QR" button
+    GUI -> FileSys: Open "Save As" Dialog
+    activate FileSys
+    FileSys --> GUI: Return Selected File Path
+    deactivate FileSys
+    
+    alt Path Selected
+        GUI -> FileSys: Write Image to Disk (.save)
+        activate FileSys
+        FileSys --> GUI: Save Successful
+        deactivate FileSys
+        GUI --> User: Show "Saved" Status Message
+    end
+
+else Input is Empty
+    GUI --> User: Show Error Message ("Please enter text")
+end
+
+deactivate GUI
+@enduml

@@ -1,0 +1,31 @@
+PROJE: QR Kod Oluşturucu ve Okuyucu (QRStudio)
+
+HAZIRLAYANLAR:
+1. Hasan Gülsün   - 220202026
+2. Göktuğ Yıldırım - 220202009
+
+-------------------------------------------------------
+
+BU KLASÖRDEKİ DOSYALAR:
+1. QRStudio (1).py   : Projenin Python kaynak kodları.
+2. QRStudio.exe      : Kurulum gerektirmeyen, doğrudan çalışan uygulama.
+3. requirements.txt  : Kaynak kodu çalıştırmak için gerekli kütüphane listesi.
+
+-------------------------------------------------------
+
+NASIL ÇALIŞTIRILIR?
+
+SEÇENEK 1: Hazır Uygulama (.exe) - ÖNERİLEN
+Hiçbir yükleme yapmadan, doğrudan klasör içindeki "QRStudio.exe" dosyasına çift tıklayarak projeyi sorunsuz çalıştırabilirsiniz.
+
+SEÇENEK 2: Kaynak Kod (.py) ile Çalıştırma
+Kodları inceleyip Python üzerinden çalıştırmak isterseniz:
+1. Terminali veya komut istemini bu klasörde açın.
+2. Gerekli kütüphaneleri yüklemek için şu komutu yazın:
+   pip install -r requirements.txt
+3. Yükleme bitince uygulamayı başlatmak için şu komutu yazın:
+   python "QRStudio (1).py"
+
+-------------------------------------------------------
+NOT:
+Bu proje 'pyzbar', 'Pillow' ve 'qrcode' kütüphanelerini kullanmaktadır.
